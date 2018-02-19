@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Psychic Game</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+   
+    
+    
+</head>
+<body>
+   <div class="container"> 
+
+    <div id="game">
+       <div class="jumbotron">
+        <h1>Humans vs The Machines</h1>
+        <p>Are you smarter then the Computer?</p>
+    </div>
+      <div class="row">
+        <div class="col-lg-12">  
+        <div class="col-sm-3">
+        <p>Human Wins: </p>
+    </div>
+    <div class="col-sm-3">
+        <p>Computer Wins: </p>
+    </div>
+    <div class="col-sm-3">
+        <p>Guesses Left: </p>
+    </div>
+    <div class="col-sm-3">
+        <p>Letters Guessed: </p>
+    </div>
+
+       </div> 
+    </div>
+  </div>  
+    <script type="text/javascript">
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9;
+    var guessesSofar =[];
+    var computerBrain = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p","q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+    document.onkeyup = function(event){
+        var humanGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        var computerLetter = computerBrain[Math.floor(Math.random()*computerBrain.length)];
+        guessesSofar.push(humanGuess);
+        
+        if(humanGuess == computerLetter){
+            wins++;
+            alert("WOW! How did you do that?")
+            guessesLeft = 9;
+            guessesSofar.length = 0;
+        }
+        
+        else if(guessesLeft == 0){
+            losses++;
+            alert("Who says Computers are dumb?");
+            guessesLeft = 9;
+            guessesSofar.length = 0;
+         }
+
+         else if(humanGuess != computerLetter){
+             guessesLeft--;
+         }
+         var html = "<div class jumbotron><h1>Humans vs The Machines</h1>" +
+         "<p>Are you smarter then the Computer?</p></div>" +
+         "<p>Human Wins:" + wins + "</p>" +
+         "<p>Computer Wins:" + losses + "</p>" +
+         "<p>Guesses Left:" + guessesLeft + "</p>"+
+         "<p>Letters Guessed:" + guessesSofar + "</p>";
+
+         document.querySelector("#game").innerHTML = html;
+    
+    }
+
+    
+    </script>
+    </body>
+    </html>
